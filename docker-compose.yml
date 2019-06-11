@@ -1,0 +1,80 @@
+version: "2"
+services:
+
+
+  eurekaserver:
+    image: eureka-servcie:1.0.0
+    build: eureka-service/
+    restart: always
+    network_mode: host
+    ports:
+      - 8761:8761
+    expose:
+      - 8761
+
+
+  zuulgateway:
+    image: zuul-service:1.0.0
+    build: zuul-service/
+    restart: always
+    network_mode: host
+    depends_on:
+      - eurekaserver
+    ports:
+      - 8070:8070
+    expose:
+      - 8070
+
+
+  configserver:
+     image: config-server:1.0.0
+     build: config-server/
+     restart: always
+     network_mode: host
+     depends_on:
+       - eurekaserver
+     ports:
+        - 8888:8888
+     expose:
+        - 8888
+
+
+  muzixservice:
+    image: muzix-service:1.0.0
+    build: muzix-service/
+    restart: always
+    network_mode: host
+    depends_on:
+      - eurekaserver
+      - configserver
+      - zuulgateway
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+
+
+
+
+  userservice:
+    image: user-service:1.0.0
+    build: user-service/
+    restart: always
+    network_mode: host
+    depends_on:
+      - eurekaserver
+      - configserver
+      - zuulgateway
+    ports:
+      - 8090:8090
+    expose:
+      - 8090
+
+  mongo:
+    image: mongo:3.4-xenial
+    restart: always
+    network_mode: host
+    ports:
+      - 27017:27017
+    expose:
+      - 27017
