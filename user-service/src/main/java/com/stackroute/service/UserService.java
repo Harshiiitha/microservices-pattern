@@ -7,11 +7,8 @@ import java.util.List;
 
 public interface UserService {
 
-
-
     public User saveUser(User user) throws UserAlreadyExistsException;
 
     public List<User> getAllUsers();
 
-    //public User deleteUser(User user);
 }

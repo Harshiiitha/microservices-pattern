@@ -13,14 +13,13 @@ import org.springframework.stereotype.Component;
 public class ApplicationListenerDemo implements ApplicationListener<ContextRefreshedEvent> {
 
     private  Environment environment;
+    private  MuzixRepository muzixRepository;
 
     @Autowired
-    public  ApplicationListenerDemo(Environment environment)
-    {
-        this.environment=environment;
+    public ApplicationListenerDemo(Environment environment, MuzixRepository muzixRepository) {
+        this.environment = environment;
+        this.muzixRepository = muzixRepository;
     }
-    @Autowired
-    MuzixRepository muzixRepository;
 
     Track track=new Track();
 

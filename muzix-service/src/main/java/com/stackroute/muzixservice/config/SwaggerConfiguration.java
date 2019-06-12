@@ -31,8 +31,6 @@ public class SwaggerConfiguration {
                 .build();
 
     }
-
-
     @Bean
     public Docket productApi()
     {

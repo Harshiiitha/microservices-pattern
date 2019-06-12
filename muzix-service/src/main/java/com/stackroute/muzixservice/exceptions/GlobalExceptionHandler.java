@@ -17,10 +17,17 @@ public class GlobalExceptionHandler {
 
         return new ResponseEntity<String>(trackAlreadyExistsException.getMessage(), HttpStatus.CONFLICT);
     }
+
     @ExceptionHandler(value= TrackNotFoundException.class)
     public ResponseEntity<String> returnTrackNotFoundException(TrackNotFoundException trackNotFoundException)
     {
         return new ResponseEntity<String>(trackNotFoundException.getMessage(), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(value = TrackListIsEmptyException.class)
+    public ResponseEntity<String> returnTrackListIsEmpty(TrackListIsEmptyException trackListisEmpty)
+    {
+        return new ResponseEntity(trackListisEmpty.getMessage(),HttpStatus.NOT_FOUND);
     }
 }
 

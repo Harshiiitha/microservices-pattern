@@ -11,15 +11,18 @@ public class Track {
     private String trackName;
     private String trackComments;
 
+    //No Argument constructor
     public Track() {
     }
 
+    //All Arguments constructor
     public Track(String trackId, String trackName, String trackComments) {
         this.trackId = trackId;
         this.trackName = trackName;
         this.trackComments = trackComments;
     }
 
+    //setter and getter methods
     public String getTrackId() {
         return trackId;
     }

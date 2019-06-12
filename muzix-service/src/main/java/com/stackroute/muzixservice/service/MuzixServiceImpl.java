@@ -2,12 +2,15 @@ package com.stackroute.muzixservice.service;
 
 import com.stackroute.muzixservice.domain.Track;
 import com.stackroute.muzixservice.exceptions.TrackAlreadyExistsException;
+import com.stackroute.muzixservice.exceptions.TrackListIsEmptyException;
 import com.stackroute.muzixservice.exceptions.TrackNotFoundException;
 import com.stackroute.muzixservice.repository.MuzixRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,14 +18,16 @@ import java.util.Optional;
 @Service
 public class MuzixServiceImpl implements MuzixService{
 
-    @Autowired
     private MuzixRepository muzixRepository;
     private Track track;
-    @Autowired
     private Environment environment;
 
-    public MuzixServiceImpl(MuzixRepository muzixRepository) {
+    @Autowired
+    public MuzixServiceImpl(MuzixRepository muzixRepository,Environment environment)
+    {
         this.muzixRepository = muzixRepository;
+        this.environment=environment;
+
     }
 
     @Override
@@ -40,8 +45,14 @@ public class MuzixServiceImpl implements MuzixService{
     }
 
     @Override
-    public List<Track> getAllTracks() {
-            return muzixRepository.findAll();
+    public List<Track> getAllTracks() throws TrackListIsEmptyException{
+
+        List<Track> trackList=muzixRepository.findAll();
+        if(trackList.isEmpty())
+        {
+            throw  new TrackListIsEmptyException("tracklistisempty.message");
+        }
+        return trackList;
 
     }
 
@@ -73,7 +84,7 @@ public class MuzixServiceImpl implements MuzixService{
         }
         else
         {
-            throw new TrackNotFoundException(environment.getProperty("trackalreadyexistsexception.message"));
+            throw new TrackNotFoundException(environment.getProperty("tracknotfoundexception.message"));
         }
       return track;
     }

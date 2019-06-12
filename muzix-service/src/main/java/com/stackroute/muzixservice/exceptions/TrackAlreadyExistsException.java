@@ -4,10 +4,13 @@ public class TrackAlreadyExistsException extends Exception{
 
     private String message;
 
+    //No Arg constructor
     public TrackAlreadyExistsException()
     {
 
     }
+
+    //All Arg constructor
     public TrackAlreadyExistsException(String message)
     {
         super(message);

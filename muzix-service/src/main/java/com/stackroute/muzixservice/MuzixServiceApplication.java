@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @SpringBootApplication
-@EnableEurekaClient
+@EnableEurekaClient //to enable muzixservice as eureka client
 public class MuzixServiceApplication {
 
 	public static void main(String[] args) {

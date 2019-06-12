@@ -2,6 +2,7 @@ package com.stackroute.muzixservice.service;
 
 import com.stackroute.muzixservice.domain.Track;
 import com.stackroute.muzixservice.exceptions.TrackAlreadyExistsException;
+import com.stackroute.muzixservice.exceptions.TrackListIsEmptyException;
 import com.stackroute.muzixservice.exceptions.TrackNotFoundException;
 import com.stackroute.muzixservice.repository.MuzixRepository;
 import org.junit.After;
@@ -75,7 +76,7 @@ public class MuzixServiceTest {
 
     }
     @Test
-    public void getAllTracks() {
+    public void getAllTracks() throws TrackListIsEmptyException {
 
         muzixRepository.save(track);
         //stubbing the mock to return specific data

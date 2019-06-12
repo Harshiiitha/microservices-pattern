@@ -12,19 +12,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class CommandLineRunnerDemo implements CommandLineRunner {
 
-    @Autowired
-    private Environment environment;
 
+    private  Environment environment;
+    private  MuzixRepository muzixRepository;
 
-   /* @Value("${track2.id}")
-    private String id;
-    @Value("${track2.name}")
-    private String name;
-    @Value("${track2.comment}")
-    private String comment;
-*/
     @Autowired
-    MuzixRepository muzixRepository;
+    public CommandLineRunnerDemo(Environment environment, MuzixRepository muzixRepository) {
+        this.environment = environment;
+        this.muzixRepository = muzixRepository;
+    }
+
     Track track=new Track();
 
     @Override
